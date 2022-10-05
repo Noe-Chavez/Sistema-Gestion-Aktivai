@@ -1,0 +1,16 @@
+h1  {
+    text-align: center;
+    padding: 15px;
+}
+
+#search-box {
+    padding: 25px;
+}
+
+#text_footer {
+    text-align: center;
+}
+
+#button_create {
+    margin-bottom: 25px;
+}
