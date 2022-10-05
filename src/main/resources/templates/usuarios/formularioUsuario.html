@@ -32,9 +32,14 @@
             <!-- ---------------------------------------------------------------------- -->
             <form>
                 <div class="mb-3">
-                    <label class="form-label">Nombre</label>
+                    <label class="form-label">Nombre Completo</label>
                     <input type="text" name="nombre" class="form-control" id="inputName" aria-describedby="name">
-                    <div id="emailHelp" class="form-text">Ingrese el nombre completo.</div>
+                    <div id="emailHelpName" class="form-text">Ingrese el nombre completo.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese una contraseña</label>
+                    <input type="password" name="password" class="form-control" id="inputPassword" aria-describedby="name">
+                    <div id="emailHelpPass" class="form-text">Ingrese una contraseña segura.</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Seleciona el rol para el usuario</label>
@@ -45,6 +50,11 @@
                         <option>Cobranza</option>
                         <option>Soporte/Ingeniería</option>
                     </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingrese un correo electrónico</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="name">
+                    <div id="emailHelp" class="form-text"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Fecha de creación</label>

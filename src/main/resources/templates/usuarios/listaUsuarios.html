@@ -28,7 +28,7 @@
                 <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
-                    <th scope="col">Fecha de Creación</th>
+                    <!--<th scope="col">Fecha de Creación</th>-->
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -37,7 +37,7 @@
                 <tr th:each="usuario:${usuarios}">
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.rol}"></td>
-                    <td th:text="${usuario.fechaCreacion}"></td>
+                    <!--<td th:text="${usuario.fechaCreacion}"></td>-->
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
                     <td>
                         <a th:href="@{/usuarios/detalle/{id} (id=${usuario.id}) }">Detalles</a> 

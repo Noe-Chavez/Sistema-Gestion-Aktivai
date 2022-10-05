@@ -35,7 +35,7 @@ public class UsuariosController {
             });
             return "usuarios/formularioUsuario";
         }
-        usuario.setId(usuarios.buscarTodosLosUsuarios().size() + 1);
+        usuario.setIdUsuario(usuarios.buscarTodosLosUsuarios().size() + 1);
         usuarios.buscarTodosLosUsuarios().add(usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
         System.out.println(usuario);

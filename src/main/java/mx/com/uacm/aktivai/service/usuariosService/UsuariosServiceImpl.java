@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class UsuariosServiceImpl implements UsuariosService {
@@ -17,31 +16,31 @@ public class UsuariosServiceImpl implements UsuariosService {
         usuarioList = new ArrayList<>(4);
 
         Usuario a = new Usuario();
-        a.setId(1);
+        a.setIdUsuario(1);
         a.setNombre("Javier López");
         a.setRol("Instalador");
-        a.setFechaCreacion("23/08/2016");
+        a.setEmail("23/08/2016");
         a.setEstatus(true);
 
         Usuario b = new Usuario();
-        b.setId(2);
+        b.setIdUsuario(2);
         b.setNombre("María Estrada");
         b.setRol("Ventas");
-        b.setFechaCreacion("14/02/2015");
+        b.setEmail("14/02/2015");
         b.setEstatus(false);
 
         Usuario c = new Usuario();
-        c.setId(3);
+        c.setIdUsuario(3);
         c.setNombre("Rodolfo Escutia");
         c.setRol("Cobranza");
-        c.setFechaCreacion("25/06/2020");
+        c.setEmail("25/06/2020");
         c.setEstatus(true);
 
         Usuario d = new Usuario();
-        d.setId(4);
+        d.setIdUsuario(4);
         d.setNombre("Laura Martinez");
         d.setRol("Soporte/Ingeniería");
-        d.setFechaCreacion("09/09/2009");
+        d.setEmail("09/09/2009");
         d.setEstatus(true);
 
         usuarioList.add(a);
@@ -58,7 +57,7 @@ public class UsuariosServiceImpl implements UsuariosService {
     @Override
     public Usuario buscarPorId(Integer idUsuario) {
         for (Usuario usuario: usuarioList)
-            if (usuario.getId() == idUsuario) return usuario;
+            if (usuario.getIdUsuario() == idUsuario) return usuario;
         return null;
     }
 

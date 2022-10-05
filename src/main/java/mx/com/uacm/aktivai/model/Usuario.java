@@ -10,23 +10,32 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Integer id;
+    private Integer idUsuario;
+    @Column(name = "usuario")
     private String nombre;
-
+    private String password;
     private String rol;
-    private String fechaCreacion;
+    private String email;
     private boolean estatus;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public void setNombre(String nombre) {
@@ -41,12 +50,12 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getFechaCreacion() {
-        return fechaCreacion;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isEstatus() {
@@ -60,10 +69,11 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id + '\'' +
+                "idUsuario=" + idUsuario +
                 ", nombre='" + nombre + '\'' +
+                ", password='" + password + '\'' +
                 ", rol='" + rol + '\'' +
-                ", fechaCreacion=" + fechaCreacion +
+                ", email='" + email + '\'' +
                 ", estatus=" + estatus +
                 '}';
     }
@@ -72,12 +82,12 @@ public class Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && getId().equals(usuario.getId()) && getNombre().equals(usuario.getNombre()) && getRol().equals(usuario.getRol()) && getFechaCreacion().equals(usuario.getFechaCreacion());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getRol(), usuario.getRol()) && Objects.equals(getEmail(), usuario.getEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getRol(), getFechaCreacion(), isEstatus());
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getRol(), getEmail(), isEstatus());
     }
 
 }
