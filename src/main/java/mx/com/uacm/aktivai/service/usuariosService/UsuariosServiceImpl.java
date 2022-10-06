@@ -1,19 +1,24 @@
 package mx.com.uacm.aktivai.service.usuariosService;
 
 import mx.com.uacm.aktivai.model.Usuario;
+import mx.com.uacm.aktivai.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuariosServiceImpl implements UsuariosService {
 
-    private List<Usuario> usuarioList;
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    //private List<Usuario> usuarioList;
 
     public UsuariosServiceImpl() {
 
-        usuarioList = new ArrayList<>(4);
+        /*usuarioList = new ArrayList<>();
 
         Usuario a = new Usuario();
         a.setIdUsuario(1);
@@ -46,19 +51,30 @@ public class UsuariosServiceImpl implements UsuariosService {
         usuarioList.add(a);
         usuarioList.add(b);
         usuarioList.add(c);
-        usuarioList.add(d);
+        usuarioList.add(d);*/
     }
 
     @Override
     public List<Usuario> buscarTodosLosUsuarios() {
-        return usuarioList;
+        return usuarioRepository.findAll();
     }
 
     @Override
     public Usuario buscarPorId(Integer idUsuario) {
-        for (Usuario usuario: usuarioList)
+        for (Usuario usuario: usuarioRepository.findAll())
             if (usuario.getIdUsuario() == idUsuario) return usuario;
         return null;
+    }
+
+    @Override
+    public void guardarUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public void eleminarUsuario(int id) {
+        Optional<Usuario> usuarioAEliminar = usuarioRepository.findById(id);
+        usuarioAEliminar.ifPresent(usuario -> usuarioRepository.delete(usuario));
     }
 
 }

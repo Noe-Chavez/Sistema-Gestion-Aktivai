@@ -14,11 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuariosController {
 
     @Autowired
-    private UsuariosService usuarios;
+    private UsuariosService usuariosService;
 
     @GetMapping("/tablaUsuarios")
     public String tableUsers(Model model) {
-        model.addAttribute("usuarios", usuarios.buscarTodosLosUsuarios());
+        model.addAttribute("usuarios", usuariosService.buscarTodosLosUsuarios());
         return "usuarios/listaUsuarios";
     }
 
@@ -35,8 +35,7 @@ public class UsuariosController {
             });
             return "usuarios/formularioUsuario";
         }
-        usuario.setIdUsuario(usuarios.buscarTodosLosUsuarios().size() + 1);
-        usuarios.buscarTodosLosUsuarios().add(usuario);
+        usuariosService.guardarUsuario(usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
         System.out.println(usuario);
         return "redirect:/usuarios/tablaUsuarios";
@@ -44,7 +43,7 @@ public class UsuariosController {
 
     @GetMapping("/detalle/{id}")
     public String mostrarDetalleUsuario(@PathVariable("id") int idUsuario, Model model) {
-        Usuario usuario = usuarios.buscarPorId(idUsuario);
+        Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
         System.out.println(usuario);
         return "usuarios/detallesUsuario";
@@ -53,6 +52,7 @@ public class UsuariosController {
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam("id") int idUsuario) {
         System.out.println("borrando el usuario con id " + idUsuario);
+        usuariosService.eleminarUsuario(idUsuario);
         return "usuarios/listaUsuarios";
     }
 

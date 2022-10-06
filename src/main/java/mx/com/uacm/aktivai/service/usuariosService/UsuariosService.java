@@ -9,4 +9,6 @@ import java.util.List;
 public interface UsuariosService {
     List<Usuario> buscarTodosLosUsuarios();
     Usuario buscarPorId(Integer idUsuario);
+    void guardarUsuario(Usuario usuario);
+    void eleminarUsuario(int id);
 }
