@@ -20,7 +20,12 @@
                 </form>
             </div>
             <div>
-                <a id="button_create" th:href="@{/usuarios/crear}" type="button" class="btn btn-primary">Nuevo</a>
+                <!--
+                    <a id="button_create" th:href="@{/usuarios/crear}" type="button" class="btn btn-primary">Nuevo</a>
+                -->
+                    <a id="button_create" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearUsuarioModal">
+                    Nuevo
+                </a>
             </div>
             <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}" role="alert"></div>
             <table class="table table-striped table-bordered table-hover">
@@ -40,28 +45,41 @@
                     <!-- <td th:text="${usuario.fechaCreacion}"></td> -->
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
                     <td>
-                        <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a> 
-                        <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
+                            <!--
+                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a>  
+                            -->
+                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
+                                Detalles 
+                            </a>
+                            <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
-            Launch demo modal
-        </button>
         
         <!-- Modal para detalles de usuario -->
-        <div class="modal fade" id="detallesUsuarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="detallesUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detallesUsuarioModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title">Detalles de Usuario</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div class="row align-items-start">
+                            <div class="col-3">
+                                <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle" alt="Cinque Terre">
+                            </div>
+                            <div id="detallesUsuario" class="col-8">
+                                <!--
+                                <h3 th:text="'Nombre: ' + ${usuario.nombre}"></h3>
+                                <h3 th:text="'Roll: ' + ${usuario.rol}"></h3> 
+                                <h3 th:text="'Estatus: ' + ${usuario.estatus}"></h3>
+                                -->
+                                <h1>Ver la manera de mostrar los atributos en el modal</h1>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -70,7 +88,57 @@
                 </div>
             </div>
         </div>
-      
+
+        <!-- Modal para crear un usuario -->
+        <div class="modal fade" id="crearUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="crearUsuarioModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Crear Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre Completo</label>
+                                <input type="text" name="nombre" class="form-control" id="inputName" aria-describedby="name">
+                                <div id="emailHelpName" class="form-text">Ingrese el nombre completo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese una contraseña</label>
+                                <input type="password" name="password" class="form-control" id="inputPassword" aria-describedby="name">
+                                <div id="emailHelpPass" class="form-text">Ingrese una contraseña segura.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Seleciona el rol para el usuario</label>
+                                <select name="rol" id="rollSelect" class="form-select">
+                                    <option></option>
+                                    <option>Instalador</option>
+                                    <option>Ventas</option>
+                                    <option>Cobranza</option>
+                                    <option>Soporte/Ingeniería</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese un correo electrónico</label>
+                                <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="name">
+                                <div id="emailHelp" class="form-text"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Activo</label>
+                                <input name="estatus" type="checkbox" checked data-toggle="toggle">
+                            </div>
+                            <button id="botonFuncional" type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                        <button id="botonFicticio" type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer th:insert="fragments/footer::footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"></footer>
  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
