@@ -32,6 +32,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 // Las vistas públicas no requieren autenticación (Por el momento todas requieren autenticación)
                 .antMatchers().permitAll()
+                // Asignar permisos a URLs por ROLES
+                .antMatchers("/usuarios/**").hasAnyAuthority("Administrador")
                 // Todas las demás URLs de la Aplicación requieren autenticación
                 .anyRequest().authenticated()
                 // El formulario de Login no requiere autenticacions
