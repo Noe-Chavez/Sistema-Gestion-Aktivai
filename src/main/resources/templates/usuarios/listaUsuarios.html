@@ -31,6 +31,7 @@
             <table class="table table-striped table-bordered table-hover">
                 <thead class="thead-dark">
                 <tr>
+                    <th scope="col">id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
                     <!-- <th scope="col">Fecha de Creación</th> -->
@@ -40,6 +41,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="usuario:${usuarios}">
+                    <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.rol}"></td>
                     <!-- <td th:text="${usuario.fechaCreacion}"></td> -->
@@ -48,7 +50,7 @@
                             <!--
                             <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a>  
                             -->
-                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
+                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
                                 Detalles 
                             </a>
                             <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
@@ -72,12 +74,6 @@
                                 <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle" alt="Cinque Terre">
                             </div>
                             <div id="detallesUsuario" class="col-8">
-                                <!--
-                                <h3 th:text="'Nombre: ' + ${usuario.nombre}"></h3>
-                                <h3 th:text="'Roll: ' + ${usuario.rol}"></h3> 
-                                <h3 th:text="'Estatus: ' + ${usuario.estatus}"></h3>
-                                -->
-                                <h1>Ver la manera de mostrar los atributos en el modal</h1>
                             </div>
                         </div>
                     </div>
