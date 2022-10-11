@@ -14,9 +14,6 @@ public class UsuariosServiceImpl implements UsuariosService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public UsuariosServiceImpl() {
-    }
-
     @Override
     public List<Usuario> buscarTodosLosUsuarios() {
         return usuarioRepository.findAll();

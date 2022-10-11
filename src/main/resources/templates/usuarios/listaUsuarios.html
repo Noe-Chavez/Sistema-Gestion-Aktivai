@@ -43,16 +43,14 @@
                 <tr th:each="usuario:${usuarios}">
                     <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
-                    <td th:text="${usuario.rol}"></td>
+                    <td text=""></td>
                     <!-- <td th:text="${usuario.fechaCreacion}"></td> -->
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
                     <td>
-                            <!--
-                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a>  
-                            -->
-                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
-                                Detalles 
-                            </a>
+                            <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a>      
+                            <!-- <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
+                                Detalles Modal 
+                            </a> -->
                             <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
                     </td>
                 </tr>
@@ -109,10 +107,9 @@
                                 <label class="form-label">Seleciona el rol para el usuario</label>
                                 <select name="rol" id="rollSelect" class="form-select">
                                     <option></option>
-                                    <option>Instalador</option>
-                                    <option>Ventas</option>
-                                    <option>Cobranza</option>
-                                    <option>Soporte/Ingeniería</option>
+                                    <div th:each="rol : ${roles}">
+                                        <option th:attr="id=${rol.idRol}" th:text="${rol.rol}"></option>
+                                    </div>
                                 </select>
                             </div>
                             <div class="mb-3">

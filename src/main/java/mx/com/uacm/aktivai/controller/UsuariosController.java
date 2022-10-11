@@ -1,6 +1,7 @@
 package mx.com.uacm.aktivai.controller;
 
 import mx.com.uacm.aktivai.model.Usuario;
+import mx.com.uacm.aktivai.service.usuariosService.RolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,16 @@ public class UsuariosController {
 
     @Autowired
     private UsuariosService usuariosService;
+    @Autowired
+    private RolService rolService;
+
+    //@Autowired
+    //private UsuarioRolRepository usuarioRolRepository;
 
     @GetMapping("/tablaUsuarios")
     public String tableUsers(Model model) {
         model.addAttribute("usuarios", usuariosService.buscarTodosLosUsuarios());
+        model.addAttribute("roles", rolService.obtenerTodos());
         return "usuarios/listaUsuarios";
     }
 
@@ -36,6 +43,10 @@ public class UsuariosController {
             return "usuarios/formularioUsuario";
         }
         usuariosService.guardarUsuario(usuario);
+        //UsuarioRol usuarioRol = new UsuarioRol();
+        //usuarioRol.setIdRol(rol.getIdRol());
+        //usuarioRol.setIdUsuario(usuario.getIdUsuario());
+        //usuarioRolRepository.save(usuarioRol);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
         System.out.println(usuario);
         return "redirect:/usuarios/tablaUsuarios";
