@@ -1,8 +1,13 @@
 package mx.com.uacm.aktivai.controller;
 
+import mx.com.uacm.aktivai.model.Rol;
 import mx.com.uacm.aktivai.model.Usuario;
+import mx.com.uacm.aktivai.model.UsuarioRol;
 import mx.com.uacm.aktivai.service.usuariosService.RolService;
+import mx.com.uacm.aktivai.service.usuariosService.UsuarioRolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuariosService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +23,14 @@ public class UsuariosController {
     private UsuariosService usuariosService;
     @Autowired
     private RolService rolService;
+    @Autowired
+    private UsuarioRolService usuarioRolService;
 
-    //@Autowired
-    //private UsuarioRolRepository usuarioRolRepository;
+    Logger logger = LoggerFactory.getLogger(UsuariosController.class);
 
     @GetMapping("/tablaUsuarios")
     public String tableUsers(Model model) {
+        logger.info("******** Entrando al metodo tableUsers ********");
         model.addAttribute("usuarios", usuariosService.buscarTodosLosUsuarios());
         model.addAttribute("roles", rolService.obtenerTodos());
         return "usuarios/listaUsuarios";
@@ -31,29 +38,35 @@ public class UsuariosController {
 
     @GetMapping("/crear")
         public String crearUsuario(Usuario usuario) { // es necesario el parametro para manejar los errores
+        logger.info("******** Entrando al metodo crearUsuario ********");
         return "usuarios/formularioUsuario";
     }
 
     @PostMapping("/guardar")
     public String guardarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        logger.info("******** Entrando al metodo guardarUsuario ********");
         if (bindingResult.hasErrors()){ // si hay errores renderizamos el mismo formulario.
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getDefaultMessage());
             });
-            return "usuarios/formularioUsuario";
+            return "usuarios/tablaUsuarios";
         }
         usuariosService.guardarUsuario(usuario);
-        //UsuarioRol usuarioRol = new UsuarioRol();
-        //usuarioRol.setIdRol(rol.getIdRol());
-        //usuarioRol.setIdUsuario(usuario.getIdUsuario());
-        //usuarioRolRepository.save(usuarioRol);
+        logger.info("Usuario: " + usuario);
+        Rol rol = rolService.buscarRolPorNombre(usuario.getRol());
+        logger.info("Rol: " + rol);
+        UsuarioRol usuarioRol = new UsuarioRol();
+        usuarioRol.setIdUsuario(usuario.getIdUsuario());
+        usuarioRol.setIdRol(rol.getIdRol());
+        logger.info("UsuarioRol: " + usuarioRol);
+        usuarioRolService.guardarUsuarioRol(usuarioRol);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
-        System.out.println(usuario);
-        return "redirect:/usuarios/tablaUsuarios";
+        return "redirect:tablaUsuarios";
     }
 
     @GetMapping("/detalle/{id}")
     public String mostrarDetalleUsuario(@PathVariable("id") int idUsuario, Model model) {
+        logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
         System.out.println(usuario);
@@ -62,6 +75,7 @@ public class UsuariosController {
 
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam("id") int idUsuario) {
+        logger.info("******** Entrando al metodo eliminarUsuario ********");
         System.out.println("borrando el usuario con id " + idUsuario);
         usuariosService.eleminarUsuario(idUsuario);
         return "usuarios/listaUsuarios";

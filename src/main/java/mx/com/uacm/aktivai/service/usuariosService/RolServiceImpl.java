@@ -29,4 +29,10 @@ public class RolServiceImpl implements RolService {
     public void guardarRol(Rol rol) {
         rolRepository.save(rol);
     }
+
+    @Override
+    public Rol buscarRolPorNombre(String rolBuscado) {
+        return rolRepository.findByRol(rolBuscado);
+    }
+
 }

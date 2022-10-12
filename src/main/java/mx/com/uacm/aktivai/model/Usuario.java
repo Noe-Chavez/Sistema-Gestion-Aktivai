@@ -14,9 +14,9 @@ public class Usuario {
     @Column(name = "usuario")
     private String nombre;
     private String password;
-
     private String email;
     private boolean estatus;
+    private String rol;
 
     public String getPassword() {
         return password;
@@ -58,6 +58,26 @@ public class Usuario {
         this.estatus = estatus;
     }
 
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario usuario)) return false;
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRol(), usuario.getRol());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRol());
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -66,19 +86,8 @@ public class Usuario {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
+                ", rol='" + rol + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus());
     }
 
 }

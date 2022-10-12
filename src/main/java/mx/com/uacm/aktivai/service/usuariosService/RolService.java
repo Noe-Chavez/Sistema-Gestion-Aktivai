@@ -8,7 +8,7 @@ public interface RolService {
 
     public Rol buscarPorId(Integer id);
     public List<Rol> obtenerTodos();
-
     public void guardarRol(Rol rol);
+    public Rol buscarRolPorNombre(String rolBuscado);
 
 }

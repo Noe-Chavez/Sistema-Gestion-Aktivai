@@ -34,7 +34,6 @@
                     <th scope="col">id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
-                    <!-- <th scope="col">Fecha de Creación</th> -->
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -43,8 +42,7 @@
                 <tr th:each="usuario:${usuarios}">
                     <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
-                    <td text=""></td>
-                    <!-- <td th:text="${usuario.fechaCreacion}"></td> -->
+                    <td th:text="${usuario.rol}"></td>
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
                     <td>
                             <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">Detalles</a>      
