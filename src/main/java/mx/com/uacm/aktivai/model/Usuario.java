@@ -1,7 +1,15 @@
 package mx.com.uacm.aktivai.model;
 
-import javax.persistence.*;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Usuarios")
@@ -10,10 +18,12 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Integer id;
+    private Long id;
     private String nombre;
 
-    private String rol;
+    @NotNull
+	@NotEmpty
+	private Rol rol;
     private String fechaCreacion;
     private boolean estatus;
 
@@ -21,11 +31,11 @@ public class Usuario {
         return nombre;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -33,15 +43,15 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getRol() {
-        return rol;
-    }
+    public Rol getRol() {
+		return rol;
+	}
 
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
-    public String getFechaCreacion() {
+	public String getFechaCreacion() {
         return fechaCreacion;
     }
 
