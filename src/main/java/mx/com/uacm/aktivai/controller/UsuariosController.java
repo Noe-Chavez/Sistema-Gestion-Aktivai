@@ -69,14 +69,14 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
-        System.out.println(usuario);
         return "usuarios/detallesUsuario";
     }
 
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam("id") int idUsuario) {
         logger.info("******** Entrando al metodo eliminarUsuario ********");
-        System.out.println("borrando el usuario con id " + idUsuario);
+        UsuarioRol usuarioRol = usuarioRolService.obtenerUsuarioRolPorElidUsuario(idUsuario);
+        usuarioRolService.eliminarUsuarioRol(usuarioRol);
         usuariosService.eleminarUsuario(idUsuario);
         return "usuarios/listaUsuarios";
     }

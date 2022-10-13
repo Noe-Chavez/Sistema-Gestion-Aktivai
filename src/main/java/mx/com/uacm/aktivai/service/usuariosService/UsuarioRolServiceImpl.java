@@ -16,4 +16,13 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
         usuarioRolRepository.save(usuarioRol);
     }
 
+    @Override
+    public UsuarioRol obtenerUsuarioRolPorElidUsuario(Integer idUsuario) {
+        return usuarioRolRepository.findByidUsuario(idUsuario);
+    }
+
+    @Override
+    public void eliminarUsuarioRol(UsuarioRol usuarioRol) {
+        usuarioRolRepository.delete(usuarioRol);
+    }
 }

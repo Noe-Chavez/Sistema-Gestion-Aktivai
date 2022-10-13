@@ -6,4 +6,8 @@ public interface UsuarioRolService {
 
     public void guardarUsuarioRol(UsuarioRol usuarioRol);
 
+    public UsuarioRol obtenerUsuarioRolPorElidUsuario(Integer idUsuario);
+
+    public void eliminarUsuarioRol(UsuarioRol usuarioRol);
+
 }

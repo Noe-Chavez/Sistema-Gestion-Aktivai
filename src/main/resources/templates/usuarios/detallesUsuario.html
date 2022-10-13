@@ -5,12 +5,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles Usuario</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
 </head>
 <body>
-  <h1>Detalles de Usuario</h1>
-  <h3 th:text="'Nombre: ' + ${usuario.nombre}"></h3>
-  <h3 th:text="'Roll: ' + ${usuario.rol}"></h3>
-  <!-- <h3 th:text="'Fecha de Creación: ' + ${usuario.fechaCreacion}"></h3> -->
-  <h3 th:text="'Estatus: ' + ${usuario.estatus}"></h3>
+  <header th:insert="fragments/nav_bar::nav_bar"></header>
+  <div class="container">
+    <div class="card text-center">
+      <div class="card-header">Usuario</div>
+      <div class="card-body">
+        <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle imageAvatarDetalles" alt="Cinque Terre">
+        <h5 class="card-title" th:text="'Nombre: ' + ${usuario.nombre}">Nombre</h5>
+        <p class="card-text" th:text="'Email: ' + ${usuario.email}">email</p>
+        <p class="card-text" th:text="'Rol: ' + ${usuario.rol}">rol</p>
+        <p class="card-text" th:text="${usuario.estatus}?'Estatus: Activo':' Estatus: Inactivo'">estatus</p>
+      </div>
+      <div class="card-footer text-muted">
+        <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalConfirmarEliminar">Eliminar</a>
+        <a type="button" class="btn btn-secondary" th:href="@{/usuarios/tablaUsuarios}">Regresar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PARA CONFIRMAR ELIMINAR USUARIO -->
+  <div class="modal fade" id="modalConfirmarEliminar" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalConfirmarEliminar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><h5>¡IMPORTANTE!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-start">
+                    <p>Al <i>Aceptar</i> eliminar a <strong th:text="${usuario.nombre}"></strong>, se perderá por completo toda la información de modo que ya no podrá iniciar sesión con este usario.</p>
+                    <p>Si lo quedesea es desactivar la cuenta por un tiempo indeterminado, porfavor actualice el estatus a desactivado, de esta forma podrá volver a activarlo para que pueda iniciar sesión el usuario</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-secondary" th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <footer th:insert="fragments/footer::footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"></footer>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <!-- JavaScript para el funcionamiento del modal de detalles de usuario -->
+  <script th:src="@{/javascript/ScriptParaModal.js}"></script>
+
 </body>
 </html>

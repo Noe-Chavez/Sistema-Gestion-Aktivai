@@ -40,7 +40,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="usuario:${usuarios}">
-                    <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}"></td>
+                    <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}">
+                    </td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.rol}"></td>
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
@@ -49,7 +50,7 @@
                             <!-- <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
                                 Detalles Modal 
                             </a> -->
-                            <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a>
+                            <!-- <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a> -->
                     </td>
                 </tr>
                 </tbody>
@@ -57,6 +58,7 @@
         </div>
         
         <!-- Modal para detalles de usuario -->
+        <!--
         <div class="modal fade" id="detallesUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detallesUsuarioModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
@@ -80,6 +82,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Modal para crear un usuario -->
         <div class="modal fade" id="crearUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="crearUsuarioModal" aria-hidden="true">
