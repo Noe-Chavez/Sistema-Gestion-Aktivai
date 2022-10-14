@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/usuarios")
 public class UsuariosController {
@@ -79,6 +81,16 @@ public class UsuariosController {
         usuarioRolService.eliminarUsuarioRol(usuarioRol);
         usuariosService.eleminarUsuario(idUsuario);
         return "usuarios/listaUsuarios";
+    }
+
+    @GetMapping("/editar")
+    public String editarUusario(@RequestParam("id") int idUsuario, Model model) {
+        logger.info("******** Entrando al metodo editarUusario ********");
+        List<Rol> roles = rolService.obtenerTodos();
+        model.addAttribute("roles", roles);
+        Usuario usuario = usuariosService.buscarPorId(idUsuario);
+        model.addAttribute("usuario", usuario);
+        return "usuarios/editarUsuario";
     }
 
 }

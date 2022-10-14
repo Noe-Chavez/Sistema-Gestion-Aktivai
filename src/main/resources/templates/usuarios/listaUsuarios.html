@@ -30,7 +30,7 @@
             <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}" role="alert"></div>
             <table class="table table-striped table-bordered table-hover">
                 <thead class="thead-dark">
-                <tr>
+                <tr th:each="usuario:${usuarios}">
                     <th scope="col">id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
@@ -50,10 +50,10 @@
                             <!-- <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
                                 Detalles Modal 
                             </a> -->
-                            <!-- <a th:href="@{/usuarios/eliminar/(id=${usuario.idUsuario}) }">Eliminar</a> -->
+                            <a th:href="@{/usuarios/editar/(id=${usuario.idUsuario}) }">Editar</a> 
                     </td>
                 </tr>
-                </tbody>
+                </tbody>    
             </table>
         </div>
         
