@@ -1,6 +1,7 @@
 package mx.com.uacm.aktivai.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,9 +15,17 @@ public class Usuario {
     @Column(name = "usuario")
     private String nombre;
     private String password;
-    private String email;
+        private String email;
     private boolean estatus;
     private String rol;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id ")
+    )
+    private List<Rol> roles;
 
     public String getPassword() {
         return password;
@@ -66,16 +75,24 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRol(), usuario.getRol());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRol(), usuario.getRol()) && Objects.equals(getRoles(), usuario.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRol());
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRol(), getRoles());
     }
 
     @Override
@@ -87,6 +104,7 @@ public class Usuario {
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
                 ", rol='" + rol + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 

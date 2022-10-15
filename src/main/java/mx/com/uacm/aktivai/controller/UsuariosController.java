@@ -70,7 +70,7 @@ public class UsuariosController {
     public String actualizarUsuario(Usuario usuario) {
         logger.info("******** Entrando al metodo guardarUsuario ********");
         usuariosService.guardarUsuario(usuario);
-        return "usuarios/tablaUsuarios";
+        return "redirect:tablaUsuarios";
     }
 
     @GetMapping("/detalle/{id}")
@@ -78,6 +78,7 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
+        logger.info("Usuario: " + usuario);
         return "usuarios/detallesUsuario";
     }
 
@@ -90,13 +91,16 @@ public class UsuariosController {
         return "usuarios/listaUsuarios";
     }
 
-    @GetMapping("/editar")
-    public String editarUusario(@RequestParam("id") int idUsuario, Model model) {
+    @GetMapping("/editar/{id}")
+    public String editarUusario(@PathVariable("id") int idUsuario, Model model) {
         logger.info("******** Entrando al metodo editarUusario ********");
         List<Rol> roles = rolService.obtenerTodos();
         model.addAttribute("roles", roles);
+        logger.info("Roles: " + roles);
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
+        logger.info("Usuario: " + usuario);
+
         return "usuarios/editarUsuario";
     }
 

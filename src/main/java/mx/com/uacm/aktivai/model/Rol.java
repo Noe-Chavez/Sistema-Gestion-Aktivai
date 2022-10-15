@@ -19,6 +19,16 @@ public class Rol {
     @Column(name = "descripcion")
     private String descripcion;
 
+    /*@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "rol_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
+    )
+    private List<Usuario> usuarios;
+
+     */
+
     public Integer getIdRol() {
         return idRol;
     }
@@ -43,6 +53,14 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
+    /*public List<Usuario> getUsuarios() {
+        return usuarios;
+    }*/
+
+    /*public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }*/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,5 +81,4 @@ public class Rol {
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
-
 }
