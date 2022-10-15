@@ -66,6 +66,13 @@ public class UsuariosController {
         return "redirect:tablaUsuarios";
     }
 
+    @PostMapping("/actualizar")
+    public String actualizarUsuario(Usuario usuario) {
+        logger.info("******** Entrando al metodo guardarUsuario ********");
+        usuariosService.guardarUsuario(usuario);
+        return "usuarios/tablaUsuarios";
+    }
+
     @GetMapping("/detalle/{id}")
     public String mostrarDetalleUsuario(@PathVariable("id") int idUsuario, Model model) {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
