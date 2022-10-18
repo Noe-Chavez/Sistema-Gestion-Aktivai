@@ -1,6 +1,7 @@
 package mx.com.uacm.aktivai.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,6 @@ public class Usuario {
     private String password;
         private String email;
     private boolean estatus;
-    private String rol;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -26,6 +26,13 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "rol_id ")
     )
     private List<Rol> roles;
+
+    public void agergarRol(Rol rol) {
+        if (this.roles == null) {
+            this.roles = new ArrayList<>();
+        }
+        this.roles.add(rol);
+    }
 
     public String getPassword() {
         return password;
@@ -67,14 +74,6 @@ public class Usuario {
         this.estatus = estatus;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
     public List<Rol> getRoles() {
         return roles;
     }
@@ -87,12 +86,12 @@ public class Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRol(), usuario.getRol()) && Objects.equals(getRoles(), usuario.getRoles());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRoles(), usuario.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRol(), getRoles());
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRoles());
     }
 
     @Override
@@ -103,7 +102,6 @@ public class Usuario {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
-                ", rol='" + rol + '\'' +
                 ", roles=" + roles +
                 '}';
     }

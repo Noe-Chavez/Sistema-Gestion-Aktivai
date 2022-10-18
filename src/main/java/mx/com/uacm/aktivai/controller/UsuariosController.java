@@ -2,7 +2,6 @@ package mx.com.uacm.aktivai.controller;
 
 import mx.com.uacm.aktivai.model.Rol;
 import mx.com.uacm.aktivai.model.Usuario;
-import mx.com.uacm.aktivai.model.UsuarioRol;
 import mx.com.uacm.aktivai.service.usuariosService.RolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuarioRolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuariosService;
@@ -49,27 +48,28 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo guardarUsuario ********");
         if (bindingResult.hasErrors()){ // si hay errores renderizamos el mismo formulario.
             bindingResult.getAllErrors().forEach(error -> {
-                System.out.println(error.getDefaultMessage());
+                logger.error(error.getDefaultMessage());
             });
             return "usuarios/tablaUsuarios";
         }
         usuariosService.guardarUsuario(usuario);
         logger.info("Usuario: " + usuario);
-        Rol rol = rolService.buscarRolPorNombre(usuario.getRol());
-        logger.info("Rol: " + rol);
-        UsuarioRol usuarioRol = new UsuarioRol();
-        usuarioRol.setIdUsuario(usuario.getIdUsuario());
-        usuarioRol.setIdRol(rol.getIdRol());
-        logger.info("UsuarioRol: " + usuarioRol);
-        usuarioRolService.guardarUsuarioRol(usuarioRol);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
+
         return "redirect:tablaUsuarios";
     }
 
     @PostMapping("/actualizar")
-    public String actualizarUsuario(Usuario usuario) {
+    public String actualizarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         logger.info("******** Entrando al metodo guardarUsuario ********");
+        if (bindingResult.hasErrors()){ // si hay errores renderizamos el mismo formulario.
+            bindingResult.getAllErrors().forEach(error -> {
+                logger.error(error.getDefaultMessage());
+            });
+            return "usuarios/tablaUsuarios";
+        }
         usuariosService.guardarUsuario(usuario);
+        redirectAttributes.addFlashAttribute("msg", "Registro se ha actualizado corectamente");
         return "redirect:tablaUsuarios";
     }
 
@@ -78,22 +78,21 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
-        logger.info("Usuario: " + usuario);
+        //logger.info("Usuario: " + usuario);
+        System.out.println("Usuario: " + usuario);
         return "usuarios/detallesUsuario";
     }
 
     @GetMapping("/eliminar")
     public String eliminarUsuario(@RequestParam("id") int idUsuario) {
         logger.info("******** Entrando al metodo eliminarUsuario ********");
-        UsuarioRol usuarioRol = usuarioRolService.obtenerUsuarioRolPorElidUsuario(idUsuario);
-        usuarioRolService.eliminarUsuarioRol(usuarioRol);
         usuariosService.eleminarUsuario(idUsuario);
         return "usuarios/listaUsuarios";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarUusario(@PathVariable("id") int idUsuario, Model model) {
-        logger.info("******** Entrando al metodo editarUusario ********");
+    public String editarUsario(@PathVariable("id") int idUsuario, Model model) {
+        logger.info("******** Entrando al metodo editarUsario ********");
         List<Rol> roles = rolService.obtenerTodos();
         model.addAttribute("roles", roles);
         logger.info("Roles: " + roles);

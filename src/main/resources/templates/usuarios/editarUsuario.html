@@ -16,6 +16,11 @@
   
   <div class="container">
     <form th:action="@{/usuarios/actualizar}" method="post">
+        <div id="idUsuario" class="mb-3">
+            <label class="form-label">Id Usuario</label>
+            <input type="text" name="idUsuario" th:field="*{usuario.idUsuario}" class="form-control" id="inputName" aria-describedby="name">
+            <div id="idHelp" class="form-text">Ingrese el nombre completo.</div>
+        </div>
         <div class="mb-3">
             <label class="form-label">Nombre Completo</label>
             <input type="text" name="nombre" th:field="*{usuario.nombre}" class="form-control" id="inputName" aria-describedby="name">
@@ -28,10 +33,10 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Seleciona el rol para el usuario</label>
-            <select name="rol" id="rollSelect" class="form-select">
+            <select name="roles" id="rollSelect" class="form-select">
                 <option></option>
                 <div th:each="rol : ${roles}">
-                    <option th:attr="id=${rol.idRol}" th:value="${rol.idRol}" th:text="${rol.rol}"></option>
+                    <option th:value="${rol.idRol}" th:text="${rol.rol}"></option>
                 </div>
             </select>
         </div>
@@ -44,7 +49,7 @@
             <label class="form-label">Activo</label>
             <input name="estatus" type="checkbox" checked data-toggle="toggle">
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
   </div>
 

@@ -20,7 +20,7 @@
         <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle imageAvatarDetalles" alt="Cinque Terre">
         <h5 class="card-title" th:text="'Nombre: ' + ${usuario.nombre}">Nombre</h5>
         <p class="card-text" th:text="'Email: ' + ${usuario.email}">email</p>
-        <p class="card-text" th:text="'Rol: ' + ${usuario.rol}">rol</p>
+        <p class="card-text" th:text="'Rol: ' + ${usuario.roles[0].rol}">rol</p>
         <p class="card-text" th:text="${usuario.estatus}?'Estatus: Activo':' Estatus: Inactivo'">estatus</p>
       </div>
       <div class="card-footer text-muted">

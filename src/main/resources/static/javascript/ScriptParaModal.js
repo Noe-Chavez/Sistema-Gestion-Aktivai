@@ -54,4 +54,7 @@ $(document).ready(function () {
         }
     });
 
+    // Ocultar la sección que muestra el id del usuario en detalles Usuario.
+    $('#idUsuario').hide();
+
 });

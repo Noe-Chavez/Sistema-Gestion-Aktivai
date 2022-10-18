@@ -19,13 +19,30 @@ public class Rol {
     @Column(name = "descripcion")
     private String descripcion;
 
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "rol_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id")
-    )
-    private List<Usuario> usuarios;
+    /*
+    @ManyToMany(mappedBy = "roles")
+    List<Usuario> usuarios;
+
+     */
+    /*
+    public void agregarUsuario(Usuario usuario) {
+        if (this.usuarios == null) {
+            this.usuarios = new ArrayList<>();
+        }
+        this.usuarios.add(usuario);
+    }
+
+    */
+
+
+    /*
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
 
      */
 
@@ -53,23 +70,17 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
-    /*public List<Usuario> getUsuarios() {
-        return usuarios;
-    }*/
-
-    /*public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }*/
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Rol rol1)) return false;
+        //return Objects.equals(getIdRol(), rol1.getIdRol()) && Objects.equals(getRol(), rol1.getRol()) && Objects.equals(getDescripcion(), rol1.getDescripcion()) && Objects.equals(getUsuarios(), rol1.getUsuarios());
         return Objects.equals(getIdRol(), rol1.getIdRol()) && Objects.equals(getRol(), rol1.getRol()) && Objects.equals(getDescripcion(), rol1.getDescripcion());
     }
 
     @Override
     public int hashCode() {
+        //return Objects.hash(getIdRol(), getRol(), getDescripcion(), getUsuarios());
         return Objects.hash(getIdRol(), getRol(), getDescripcion());
     }
 
@@ -79,6 +90,8 @@ public class Rol {
                 "idRol=" + idRol +
                 ", rol='" + rol + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                //", usuarios=" + usuarios +
                 '}';
     }
+
 }
