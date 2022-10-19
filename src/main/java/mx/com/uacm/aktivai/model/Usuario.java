@@ -18,6 +18,7 @@ public class Usuario {
     private String password;
     private String email;
     private boolean estatus;
+    private String avatar;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -82,16 +83,24 @@ public class Usuario {
         this.roles = roles;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getRoles(), usuario.getRoles());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getAvatar(), usuario.getAvatar()) && Objects.equals(getRoles(), usuario.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getRoles());
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getAvatar(), getRoles());
     }
 
     @Override
@@ -102,6 +111,7 @@ public class Usuario {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
+                ", avatar='" + avatar + '\'' +
                 ", roles=" + roles +
                 '}';
     }

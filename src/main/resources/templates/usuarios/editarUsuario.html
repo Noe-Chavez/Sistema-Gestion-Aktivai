@@ -15,7 +15,7 @@
   <header th:insert="fragments/nav_bar::nav_bar"></header>
 
   <div class="container">
-    <form th:action="@{/usuarios/actualizar}" method="post">
+    <form th:action="@{/usuarios/actualizar}" method="post" enctype="multipart/form-data">
         <!-- Solo se ejecuta si hay errores en los farmatos recibidos de los campos -->
         <!-- <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
             Por favor Corrija los siguientes Errores:
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <a type="button" class="btn btn-secondary" >Subir imagen</a>
+                    <input type="file" class="btn btn-secondary form-control-file" name="imagenAvatarUsuario">Subir imagen</input>
                 </div>
             </div>
             <div class="col-12">
@@ -71,7 +71,7 @@
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
                             <input type="text" th:field="*{usuario.password}" name="password" class="form-control" id="inputPassword" aria-describedby="name">
-                            <div id="emailHelpPass" class="form-text"></div>
+                            <div id="helpPass" class="form-text"></div>
                         </div>
                         <div class="col-3">
                             <label class="form-label">Confirmar contraseña</label>

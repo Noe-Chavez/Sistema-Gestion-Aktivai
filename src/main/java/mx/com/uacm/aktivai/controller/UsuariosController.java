@@ -5,6 +5,7 @@ import mx.com.uacm.aktivai.model.Usuario;
 import mx.com.uacm.aktivai.service.usuariosService.RolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuarioRolService;
 import mx.com.uacm.aktivai.service.usuariosService.UsuariosService;
+import mx.com.uacm.aktivai.utilities.UtileriaImagenesAvatar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -60,16 +62,29 @@ public class UsuariosController {
     }
 
     @PostMapping("/actualizar")
-    public String actualizarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String actualizarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("imagenAvatarUsuario") MultipartFile multiPart) {
+
         logger.info("******** Entrando al metodo guardarUsuario ********");
+
         if (bindingResult.hasErrors()){ // si hay errores renderizamos el mismo formulario.
             bindingResult.getAllErrors().forEach(error -> {
                 logger.error(error.getDefaultMessage());
             });
             return "usuarios/tablaUsuarios";
         }
+
+        if (!multiPart.isEmpty()) {
+            String uri = "aktivai/img-avatars/"; // Linux/MAC
+            //String uri = "c:/empleos/img-vacantes/"; // Windows
+            String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, uri);
+            if (nombreImagen != null){ // valida si la imagen se subio o no
+                usuario.setAvatar(nombreImagen);
+            }
+        }
+
         usuariosService.guardarUsuario(usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro se ha actualizado corectamente");
+
         return "redirect:tablaUsuarios";
     }
 
