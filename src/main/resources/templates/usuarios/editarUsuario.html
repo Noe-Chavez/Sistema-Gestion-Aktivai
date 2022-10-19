@@ -13,43 +13,90 @@
 </head>
 <body>
   <header th:insert="fragments/nav_bar::nav_bar"></header>
-  
+
   <div class="container">
     <form th:action="@{/usuarios/actualizar}" method="post">
-        <div id="idUsuario" class="mb-3">
-            <label class="form-label">Id Usuario</label>
-            <input type="text" name="idUsuario" th:field="*{usuario.idUsuario}" class="form-control" id="inputName" aria-describedby="name">
-            <div id="idHelp" class="form-text">Ingrese el nombre completo.</div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Nombre Completo</label>
-            <input type="text" name="nombre" th:field="*{usuario.nombre}" class="form-control" id="inputName" aria-describedby="name">
-            <div id="nombreHelp" class="form-text">Ingrese el nombre completo.</div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Ingrese una contraseña</label>
-            <input th:field="*{usuario.password}" type="password" name="password" class="form-control" id="inputPassword" aria-describedby="name">
-            <div id="helpPass" class="form-text">Ingrese una contraseña segura.</div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Seleciona el rol para el usuario</label>
-            <select name="roles" id="rollSelect" class="form-select">
-                <option></option>
-                <div th:each="rol : ${roles}">
-                    <option th:value="${rol.idRol}" th:text="${rol.rol}"></option>
+        <!-- Solo se ejecuta si hay errores en los farmatos recibidos de los campos -->
+        <!-- <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            Por favor Corrija los siguientes Errores:
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div> -->
+        <!-- ---------------------------------------------------------------------- -->
+        <div class="card-header">Editar Usuario</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle imageAvatarDetalles mandarAIzquierda" alt="Cinque Terre">
                 </div>
-            </select>
+                <div class="col-4">
+                    <div id="espacioInferior25pixeles">Nombre Imagen</div>
+                    <div class="form-check form-switch">
+                        <input name="estatus" id="flexSwitchCheckDefault" class="form-check-input" type="checkbox" th:field="*{usuario.estatus}">
+                        <label id="flexSwitchCheckDefaultText" class="form-check-label" for="flexSwitchCheckDefault">Activo/Bloqueado</label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a type="button" class="btn btn-secondary" >Subir imagen</a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <div class="row" >
+                        <div id="idUsuario" class="mb-3">
+                            <label class="form-label">Id Usuario</label>
+                            <input type="text" name="idUsuario" th:field="*{usuario.idUsuario}" class="form-control" id="inputName" aria-describedby="name">
+                            <div id="idHelp" class="form-text">Ingrese el nombre completo.</div>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label">Nombre</label>
+                        </div>
+                        <div id="espacioInferior25pixeles" class="col-9">
+                            <input type="text" name="nombre" th:field="*{usuario.nombre}" class="form-control" id="inputNombre">
+                            <div id="emailHelpPass" class="form-text"></div>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label">Rol</label>
+                        </div>
+                        <div id="espacioInferior25pixeles" class="col-9">
+                            <select name="roles" th:field="*{usuario.roles[0].idRol}" class="form-select">
+                                <div th:each="rol:${roles}">
+                                    <option th:value="${rol.idRol}" th:text="${rol.rol}"></option>
+                                </div>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label">contraseña</label>
+                        </div>
+                        <div id="espacioInferior25pixeles" class="col-9">
+                            <input type="text" th:field="*{usuario.password}" name="password" class="form-control" id="inputPassword" aria-describedby="name">
+                            <div id="emailHelpPass" class="form-text"></div>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label">Confirmar contraseña</label>
+                        </div>
+                        <div id="espacioInferior25pixeles" class="col-9">
+                            <input type="text" th:field="*{usuario.password}" class="form-control" id="inputPasswordConfirm" aria-describedby="name">
+                            <div id="passwordConfirmHelpPass" class="form-text"></div>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label">Correo Electrónico</label>
+                        </div>
+                        <div id="espacioInferior25pixeles" class="col-9">
+                            <input type="email" name="email" th:field="*{usuario.email}" class="form-control" id="inputEmail" aria-describedby="name">
+                            <div id="emailHelpPass" class="form-text"></div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-4">
+                                <a th:href="@{/usuarios/tablaUsuarios}" type="button" class="btn btn-secondary">Salir</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Ingrese un correo electrónico</label>
-            <input type="email" name="email" th:field="*{usuario.email}" class="form-control" id="inputEmail" aria-describedby="name">
-            <div id="emailHelp" class="form-text"></div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Activo</label>
-            <input name="estatus" type="checkbox" checked data-toggle="toggle">
-        </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
   </div>
 
@@ -65,3 +112,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <!-- JavaScript para el funcionamiento del modal de detalles de usuario -->
   <script th:src="@{/javascript/ScriptParaModal.js}"></script>
+</body>

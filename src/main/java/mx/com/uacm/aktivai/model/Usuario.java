@@ -16,7 +16,7 @@ public class Usuario {
     @Column(name = "usuario")
     private String nombre;
     private String password;
-        private String email;
+    private String email;
     private boolean estatus;
 
     @ManyToMany(fetch = FetchType.EAGER)

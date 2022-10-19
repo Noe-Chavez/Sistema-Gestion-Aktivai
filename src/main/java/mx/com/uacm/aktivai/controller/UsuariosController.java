@@ -78,7 +78,7 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
-        //logger.info("Usuario: " + usuario);
+        logger.info("Usuario: " + usuario);
         System.out.println("Usuario: " + usuario);
         return "usuarios/detallesUsuario";
     }
