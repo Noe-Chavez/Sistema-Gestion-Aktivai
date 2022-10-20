@@ -9,6 +9,7 @@ import mx.com.uacm.aktivai.utilities.UtileriaImagenesAvatar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/usuarios")
 public class UsuariosController {
+
+    @Value("${aktivai.ruta.avatars}")
+    private String rutaAvatars;
 
     @Autowired
     private UsuariosService usuariosService;
@@ -74,9 +78,10 @@ public class UsuariosController {
         }
 
         if (!multiPart.isEmpty()) {
-            String uri = "/aktivai/img-avatars/"; // Linux/MAC
+            //String uri = "/aktivai/img-avatars/"; // Linux/MAC
             //String uri = "c:/aktivai/img-avatars/"; // Windows
-            String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, uri);
+            //String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, uri);
+            String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, rutaAvatars);
             if (nombreImagen != null){ // valida si la imagen se subio o no
                 usuario.setAvatar(nombreImagen);
             }
