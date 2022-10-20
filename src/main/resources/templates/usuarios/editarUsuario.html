@@ -28,7 +28,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
-                    <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle imageAvatarDetalles mandarAIzquierda" alt="Cinque Terre">
+                    <img id="imageAvatar" th:src="@{ /avatars/{img} (img=${usuario.avatar}) }" class="rounded-circle imageAvatarDetalles mandarAIzquierda" alt="Cinque Terre">
                 </div>
                 <div class="col-4">
                     <div id="espacioInferior25pixeles">Nombre Imagen</div>
