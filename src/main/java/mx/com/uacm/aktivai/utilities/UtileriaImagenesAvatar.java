@@ -18,18 +18,30 @@ public class UtileriaImagenesAvatar {
         if (nombreOriginal != null)
             nombreOriginal = nombreOriginal.replace(" ", "-");// Remplazando espacios por guiones medios en caso de que se suba una imagen con espacios en el nombre.
 
+        String nombreFinal = alfaNumericoAleatorio(8) + nombreOriginal;
+
         try {
-            File archivoImagen = new File(uri + nombreOriginal);
+            File archivoImagen = new File(uri + nombreFinal);
             logger.info("Archivo: " + archivoImagen.getAbsolutePath());
             // Guardar archivo en el sistema de almacenamiento permanente (HDD, SDD, etc)
             multipartFile.transferTo(archivoImagen);
             logger.info("multiPArtFile: " + multipartFile.getOriginalFilename());
-            return nombreOriginal;
+            return nombreFinal;
         } catch (IOException e) {
             logger.error("ERROR --> " + e.getMessage());
             return null;
         }
 
+    }
+
+    public static String alfaNumericoAleatorio(int cantidadCaracteresAlfaNumericos) {
+        final String CARACTERES = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder stringBuilder = new StringBuilder();
+        while (cantidadCaracteresAlfaNumericos-- != 0) {
+            int caracter = (int) (Math.random() * CARACTERES.length());
+            stringBuilder.append(CARACTERES.charAt(caracter));
+        }
+        return stringBuilder.toString();
     }
 
 }
