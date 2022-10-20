@@ -75,7 +75,7 @@ public class UsuariosController {
 
         if (!multiPart.isEmpty()) {
             String uri = "/aktivai/img-avatars/"; // Linux/MAC
-            //String uri = "c:/empleos/img-vacantes/"; // Windows
+            //String uri = "c:/aktivai/img-avatars/"; // Windows
             String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, uri);
             if (nombreImagen != null){ // valida si la imagen se subio o no
                 usuario.setAvatar(nombreImagen);
