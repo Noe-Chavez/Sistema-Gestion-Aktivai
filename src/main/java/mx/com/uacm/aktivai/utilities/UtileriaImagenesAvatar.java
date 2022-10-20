@@ -15,6 +15,9 @@ public class UtileriaImagenesAvatar {
 
         String nombreOriginal = multipartFile.getOriginalFilename();
 
+        if (nombreOriginal != null)
+            nombreOriginal = nombreOriginal.replace(" ", "-");// Remplazando espacios por guiones medios en caso de que se suba una imagen con espacios en el nombre.
+
         try {
             File archivoImagen = new File(uri + nombreOriginal);
             logger.info("Archivo: " + archivoImagen.getAbsolutePath());
