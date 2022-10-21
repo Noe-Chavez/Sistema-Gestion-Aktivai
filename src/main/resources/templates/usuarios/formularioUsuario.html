@@ -23,12 +23,12 @@
         <div class="container">
             <h1>Crear Usuario</h1>
             <!-- Solo se ejecuta si hay errores en los farmatos recibidos de los campos -->
-            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
                 Por favor Corrija los siguientes Errores:
                 <ul>
                     <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
                 </ul>
-            </div>
+            </div>-->
             <!-- ---------------------------------------------------------------------- -->
             <form>
                 <div class="mb-3">

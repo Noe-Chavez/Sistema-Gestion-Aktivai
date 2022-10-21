@@ -17,7 +17,7 @@
   <div class="container">
     <form th:action="@{/usuarios/actualizar}" method="post" enctype="multipart/form-data">
         <!-- Solo se ejecuta si hay errores en los farmatos recibidos de los campos -->
-        <!-- <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+         <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
             Por favor Corrija los siguientes Errores:
             <ul>
                 <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
@@ -28,12 +28,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
-                    <img id="imageAvatar" th:src="@{ /avatars/{img} (img=${usuario.avatar}) }" class="rounded-circle imageAvatarDetalles mandarAIzquierda" alt="Cinque Terre">
+                    <img id="imageAvatar" th:src="@{ /avatars/{img} (img=${usuario.avatar}) }" class="rounded-circle imageAvatarDetalles mandarAIzquierda" alt="Sin Avatar">
                 </div>
                 <div class="col-4">
-                    <div id="espacioInferior25pixeles">Nombre Imagen</div>
+                    <div id="espacioInferior25pixeles" th:text="${usuario.avatar}">Nombre Imagen</div>
                     <div class="form-check form-switch">
-                        <input name="estatus" id="flexSwitchCheckDefault" class="form-check-input" type="checkbox" th:field="*{usuario.estatus}">
+                         <input name="estatus" id="flexSwitchCheckDefault" class="form-check-input" type="checkbox" th:field="*{usuario.estatus}"> 
                         <label id="flexSwitchCheckDefaultText" class="form-check-label" for="flexSwitchCheckDefault">Activo/Bloqueado</label>
                     </div>
                 </div>

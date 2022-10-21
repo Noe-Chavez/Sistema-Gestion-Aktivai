@@ -58,6 +58,7 @@ public class UsuariosController {
             });
             return "usuarios/tablaUsuarios";
         }
+        usuario.setAvatar("Image_avatar.png");
         usuariosService.guardarUsuario(usuario);
         logger.info("Usuario: " + usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");
@@ -74,7 +75,7 @@ public class UsuariosController {
             bindingResult.getAllErrors().forEach(error -> {
                 logger.error(error.getDefaultMessage());
             });
-            return "usuarios/tablaUsuarios";
+            return "usuarios/editarUsuario";
         }
 
         if (!multiPart.isEmpty()) {
