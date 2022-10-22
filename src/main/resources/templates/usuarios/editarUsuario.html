@@ -38,9 +38,11 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <input type="file" class="btn btn-secondary form-control-file" name="imagenAvatarUsuario">Subir imagen</input>
+                    <h6>Subir Avatar</h6>
+                    <input type="file" class="btn btn-secondary form-control-file" name="imagenAvatarUsuario"></input>
                 </div>
             </div>
+            <hr/>
             <div class="col-12">
                 <div class="mb-3">
                     <div class="row" >
@@ -53,14 +55,14 @@
                             <label class="form-label">Nombre</label>
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
-                            <input type="text" name="nombre" th:field="*{usuario.nombre}" class="form-control" id="inputNombre">
+                            <input type="text" name="nombre" th:field="*{usuario.nombre}" class="form-control" id="inputNombre" required>
                             <div id="emailHelpPass" class="form-text"></div>
                         </div>
                         <div class="col-3">
                             <label class="form-label">Rol</label>
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
-                            <select name="roles" th:field="*{usuario.roles[0].idRol}" class="form-select">
+                            <select name="roles" th:field="*{usuario.roles[0].idRol}" class="form-select" required>
                                 <div th:each="rol:${roles}">
                                     <option th:value="${rol.idRol}" th:text="${rol.rol}"></option>
                                 </div>
@@ -70,21 +72,21 @@
                             <label class="form-label">contraseña</label>
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
-                            <input type="text" th:field="*{usuario.password}" name="password" class="form-control" id="inputPassword" aria-describedby="name">
+                            <input type="text" th:field="*{usuario.password}" name="password" class="form-control" id="inputPassword" aria-describedby="name" required>
                             <div id="helpPass" class="form-text"></div>
                         </div>
                         <div class="col-3">
                             <label class="form-label">Confirmar contraseña</label>
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
-                            <input type="text" th:field="*{usuario.password}" class="form-control" id="inputPasswordConfirm" aria-describedby="name">
+                            <input type="text" th:field="*{usuario.password}" class="form-control" id="inputPasswordConfirm" aria-describedby="name" required>
                             <div id="passwordConfirmHelpPass" class="form-text"></div>
                         </div>
                         <div class="col-3">
                             <label class="form-label">Correo Electrónico</label>
                         </div>
                         <div id="espacioInferior25pixeles" class="col-9">
-                            <input type="email" name="email" th:field="*{usuario.email}" class="form-control" id="inputEmail" aria-describedby="name">
+                            <input type="email" name="email" th:field="*{usuario.email}" class="form-control" id="inputEmail" aria-describedby="name" required>
                             <div id="emailHelpPass" class="form-text"></div>
                         </div>
                         <div class="row justify-content-end">
