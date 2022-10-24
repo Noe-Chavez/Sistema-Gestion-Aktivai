@@ -83,7 +83,6 @@ public class UsuariosController {
             //String uri = "c:/aktivai/img-avatars/"; // Windows
             //String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, uri);
             String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, rutaAvatars);
-            System.out.println("nombreImagen = " + nombreImagen);
             if (nombreImagen != null){ // valida si la imagen se subio o no
                 usuario.setAvatar(nombreImagen);
             }

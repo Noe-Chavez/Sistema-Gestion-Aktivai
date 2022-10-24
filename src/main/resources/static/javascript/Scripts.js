@@ -1,11 +1,6 @@
 $(document).ready(function () {
     console.log("javascript y JQuery funcionando.");
     
-    $('#botonFuncional').hide();
-    $('#botonFicticio').click(function (e) { 
-        $('#botonFuncional').click();
-    });
-    
     /** 
      * Para colocar la palabra activa o inactivo en el formulario de detalles usuario
     */

@@ -95,53 +95,70 @@
         -->
 
         <!-- Modal para crear un usuario -->
-        <div class="modal fade" id="crearUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="crearUsuarioModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Crear Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}">
+        <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}" class="row g-3 needs-validation" novalidate>
+            <div class="modal fade" id="crearUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="crearUsuarioModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Crear Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
                             <div class="mb-3">
-                                <label class="form-label">Nombre Completo</label>
-                                <input type="text" name="nombre" class="form-control" id="inputName" aria-describedby="name">
-                                <div id="emailHelpName" class="form-text">Ingrese el nombre completo.</div>
+                                <label for="validationServer01" class="form-label">Nombre Completo</label>
+                                <input type="text" name="nombre" aria-describedby="name" class="form-control is-valid" id="inputNombreUsuario" required>
+                                <div class="invalid-feedback">
+                                    Ingrese el nombre completo.
+                                </div>
+                            </div>                            
+
+                            <div class="mb-3">
+                                <label for="validationServer01" class="form-label">Ingrese una contraseña</label>
+                                <input type="password" name="password" aria-describedby="password" class="form-control is-valid" id="inputPassword" required>
+                                <div class="invalid-feedback">
+                                    Ingresa una contraseña para este usuario.
+                                </div>
                             </div>
+
                             <div class="mb-3">
-                                <label class="form-label">Ingrese una contraseña</label>
-                                <input type="password" name="password" class="form-control" id="inputPassword" aria-describedby="name">
-                                <div id="emailHelpPass" class="form-text">Ingrese una contraseña segura.</div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Seleciona el rol para el usuario</label>
-                                <select name="roles" id="rollSelect" class="form-select">
-                                    <option></option>
+                                <label for="validationCustom04" class="form-label">Seleciona el rol para el usuario</label>
+                                <select name="roles" id="rollSelect" class="form-select" required>
+                                    <option selected disabled value="">Seleciona un rol</option>
                                     <div th:each="rol : ${roles}">
                                         <option th:value="${rol.idRol}" th:text="${rol.rol}"></option>
                                     </div>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Selecciona un rol para este usuario.
+                                </div>
                             </div>
+
                             <div class="mb-3">
-                                <label class="form-label">Ingrese un correo electrónico</label>
-                                <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="name">
-                                <div id="emailHelp" class="form-text"></div>
+                                <label for="validationEmailUsuario" class="form-label">Ingrese un correo electrónico</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailUsuario" required>
+                                    <div class="invalid-feedback">
+                                        Ingrese un correo electrónico.
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Activo</label>
-                                <input name="estatus" type="checkbox" checked data-toggle="toggle">
-                            </div>
-                            <button id="botonFuncional" type="submit" class="btn btn-primary">Guardar</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                        <button id="botonFicticio" type="submit" class="btn btn-primary">Guardar</button>
+
+                            <div class="form-check form-switch">
+                                <input name="estatus" id="flexSwitchCheckDefault" class="form-check-input" type="checkbox" checked> 
+                               <label id="flexSwitchCheckDefaultText" class="form-check-label" for="flexSwitchCheckDefault">Activo/Bloqueado</label>
+                           </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                            <button id="botonFicticio" type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <footer th:insert="fragments/footer::footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"></footer>
  
@@ -153,6 +170,7 @@
 
         <!-- JavaScript para el funcionamiento del modal de detalles de usuario -->
         <script th:src="@{/javascript/Scripts.js}"></script>
+        <script th:src="@{/javascript/ScriptValidaciones.js}"></script>
 
     </body>
 </html>
