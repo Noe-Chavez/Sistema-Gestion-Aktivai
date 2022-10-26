@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +42,14 @@ public class UsuariosController {
         logger.info("******** Entrando al metodo tableUsers ********");
         model.addAttribute("usuarios", usuariosService.buscarTodosLosUsuarios());
         model.addAttribute("roles", rolService.obtenerTodos());
+        return "usuarios/listaUsuarios";
+    }
+
+    @GetMapping("/tablaUsuariosPaginada")
+    public String tablaUsuariosPaginada(Model model, Pageable pageable) {
+        logger.info("******** Entrando al metodo  tablaUsuariosPaginada ********");
+        Page<Usuario> usuariosPaginados = usuariosService.obtenerTodosLosUsuarioPaginados(pageable);
+        model.addAttribute("usuarios", usuariosPaginados);
         return "usuarios/listaUsuarios";
     }
 

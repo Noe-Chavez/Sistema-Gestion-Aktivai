@@ -3,6 +3,8 @@ package mx.com.uacm.aktivai.service.usuariosService;
 import mx.com.uacm.aktivai.model.Usuario;
 import mx.com.uacm.aktivai.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,11 @@ public class UsuariosServiceImpl implements UsuariosService {
     public void eleminarUsuario(int id) {
         Optional<Usuario> usuarioAEliminar = usuarioRepository.findById(id);
         usuarioAEliminar.ifPresent(usuario -> usuarioRepository.delete(usuario));
+    }
+
+    @Override
+    public Page<Usuario> obtenerTodosLosUsuarioPaginados(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
     }
 
 }
