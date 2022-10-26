@@ -50,15 +50,26 @@ public class UsuariosController {
     }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String guardarUsuario(Usuario usuario, BindingResult bindingResult, RedirectAttributes redirectAttributes, @RequestParam("imagenAvatarUsuario") MultipartFile multiPart) {
+
         logger.info("******** Entrando al metodo guardarUsuario ********");
+
         if (bindingResult.hasErrors()){ // si hay errores renderizamos el mismo formulario.
             bindingResult.getAllErrors().forEach(error -> {
                 logger.error(error.getDefaultMessage());
             });
             return "usuarios/tablaUsuarios";
         }
-        usuario.setAvatar("Image_avatar.png");
+
+        if (!multiPart.isEmpty()) {
+            String nombreImagen = UtileriaImagenesAvatar.guardarArchivo(multiPart, rutaAvatars);
+            if (nombreImagen != null){ // valida si la imagen se subio o no
+                usuario.setAvatar(nombreImagen);
+            }
+        } else {
+            usuario.setAvatar("Image_avatar.png");
+        }
+
         usuariosService.guardarUsuario(usuario);
         logger.info("Usuario: " + usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");

@@ -95,7 +95,7 @@
         -->
 
         <!-- Modal para crear un usuario -->
-        <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}" class="row g-3 needs-validation" novalidate>
+        <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
             <div class="modal fade" id="crearUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="crearUsuarioModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
@@ -104,6 +104,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+
+                            <div class="mb-3">
+                                <h6>Subir Avatar</h6>
+                                <input type="file" class="form-control" name="imagenAvatarUsuario"></input>
+                                <div class="invalid-feedback">Archivo no válido</div>
+                            </div>
 
                             <div class="mb-3">
                                 <label for="validationServer01" class="form-label">Nombre Completo</label>
