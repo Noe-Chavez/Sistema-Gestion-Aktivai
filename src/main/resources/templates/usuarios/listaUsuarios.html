@@ -35,6 +35,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
                     <th scope="col">Estatus</th>
+                    <th scope="col">Fecha de Creación</th>
                     <th scope="col">Acciones</th>
                 </tr>
                 </thead>
@@ -45,6 +46,7 @@
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.roles[0].rol}"></td>
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
+                    <td th:text="${#dates.format(usuario.fechaCreacion, 'dd-MM-yyyy HH:mm')}"></td>
                     <td>
                             <a title="Detalles" th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">

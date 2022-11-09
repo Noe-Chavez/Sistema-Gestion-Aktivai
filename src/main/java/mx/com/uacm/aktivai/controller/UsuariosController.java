@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -80,6 +81,9 @@ public class UsuariosController {
             usuario.setAvatar("Image_avatar.png");
         }
 
+        // Asignar fecha de creación obteneida del sistema.
+        Date fechaSistema = new Date();
+        usuario.setFechaCreacion(fechaSistema);
         usuariosService.guardarUsuario(usuario);
         logger.info("Usuario: " + usuario);
         redirectAttributes.addFlashAttribute("msg", "Registro Guardado");

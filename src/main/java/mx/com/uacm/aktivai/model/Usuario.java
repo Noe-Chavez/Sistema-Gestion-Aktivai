@@ -1,7 +1,7 @@
 package mx.com.uacm.aktivai.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +19,7 @@ public class Usuario {
     private String email;
     private boolean estatus;
     private String avatar;
+    private Date fechaCreacion;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -27,13 +28,6 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "rol_id ")
     )
     private List<Rol> roles;
-
-    public void agergarRol(Rol rol) {
-        if (this.roles == null) {
-            this.roles = new ArrayList<>();
-        }
-        this.roles.add(rol);
-    }
 
     public String getPassword() {
         return password;
@@ -91,16 +85,24 @@ public class Usuario {
         this.avatar = avatar;
     }
 
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getAvatar(), usuario.getAvatar()) && Objects.equals(getRoles(), usuario.getRoles());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getAvatar(), usuario.getAvatar()) && Objects.equals(getFechaCreacion(), usuario.getFechaCreacion()) && Objects.equals(getRoles(), usuario.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getAvatar(), getRoles());
+        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getAvatar(), getFechaCreacion(), getRoles());
     }
 
     @Override
@@ -112,6 +114,7 @@ public class Usuario {
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
                 ", avatar='" + avatar + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
                 ", roles=" + roles +
                 '}';
     }
