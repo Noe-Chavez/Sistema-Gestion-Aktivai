@@ -119,9 +119,9 @@ public class UsuariosController {
     public String mostrarDetalleUsuario(@PathVariable("id") int idUsuario, Model model) {
         logger.info("******** Entrando al metodo mostrarDetalleUsuario ********");
         Usuario usuario = usuariosService.buscarPorId(idUsuario);
+        usuario = usuariosService.buscarPorId(idUsuario);
         model.addAttribute("usuario", usuario);
         logger.info("Usuario: " + usuario);
-        System.out.println("Usuario: " + usuario);
         return "usuarios/detallesUsuario";
     }
 

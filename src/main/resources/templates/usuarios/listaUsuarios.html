@@ -51,7 +51,7 @@
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                     <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                 </svg>
-                            </a>      
+                            </a> 
                             <!-- <a th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }" type="button" class="btn btn-primary botonDetallesUsuario" data-bs-toggle="modal" data-bs-target="#detallesUsuarioModal">
                                 Detalles Modal 
                             </a> -->
@@ -76,8 +76,8 @@
         </div>
         
         <!-- Modal para detalles de usuario -->
-        <!--
-        <div class="modal fade" id="detallesUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detallesUsuarioModal" aria-hidden="true">
+        
+        <!--<div class="modal fade" id="detallesUsuarioModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detallesUsuarioModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -87,9 +87,10 @@
                     <div class="modal-body">
                         <div class="row align-items-start">
                             <div class="col-3">
-                                <img id="imageAvatar" th:src="@{/images/Image_avatar.png}" class="rounded-circle" alt="Cinque Terre">
+                                <img id="imageAvatar" th:src="@{ /avatars/{img} (img=${usuario.avatar}) }" class="rounded-circle" alt="Cinque Terre">
                             </div>
                             <div id="detallesUsuario" class="col-8">
+                                <h1 th:text="${usuario.nombre}"></h1>
                             </div>
                         </div>
                     </div>
@@ -99,8 +100,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        -->
+        </div>-->
 
         <!-- Modal para crear un usuario -->
         <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
