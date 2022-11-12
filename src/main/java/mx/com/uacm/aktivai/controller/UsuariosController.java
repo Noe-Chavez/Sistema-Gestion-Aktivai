@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -147,6 +148,18 @@ public class UsuariosController {
         logger.info("Usuario: " + usuario);
 
         return "usuarios/editarUsuario";
+    }
+
+    @GetMapping(path = "/buscar")
+    public String buscar(@Param("palabraClave") String palabraClave, Model model) {
+        logger.info("Entrando al método buscar");
+        System.out.println("**** " + palabraClave + " ****");
+        List<Usuario> usuarios = usuariosService.buscarPorPalabraClave(palabraClave);
+        System.out.println("*****" + usuarios + "*****");
+        model.addAttribute("usuarios",usuarios);
+        model.addAttribute("roles", rolService.obtenerTodos());
+        model.addAttribute("palabraClave", palabraClave);
+        return "usuarios/listaUsuarios";
     }
 
 }

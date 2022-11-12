@@ -12,4 +12,5 @@ public interface UsuariosService {
     void guardarUsuario(Usuario usuario);
     void eleminarUsuario(int id);
     Page<Usuario> obtenerTodosLosUsuarioPaginados(Pageable pageable);
+    public List<Usuario> buscarPorPalabraClave(String email);
 }

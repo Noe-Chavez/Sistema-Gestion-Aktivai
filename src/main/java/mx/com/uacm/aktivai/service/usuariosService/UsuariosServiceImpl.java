@@ -44,4 +44,9 @@ public class UsuariosServiceImpl implements UsuariosService {
         return usuarioRepository.findAll(pageable);
     }
 
+    @Override
+    public List<Usuario> buscarPorPalabraClave(String palabraClave) {
+        return usuarioRepository.buscarPorPalabraClave(palabraClave);
+    }
+
 }

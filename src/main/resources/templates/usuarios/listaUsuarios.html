@@ -14,9 +14,12 @@
         <div class="container">
             <h1>USUARIOS</h1>
             <div id="search-box">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                <form class="d-flex needs-validation" novalidate role="search" th:action="@{/usuarios/buscar}">
+                    <input id="palabraClave" class="form-control me-2 is-valid" name="palabraClave" th:value="${palabraClave}" type="search" placeholder="ej. Shampoo" aria-label="palabraClave" required>
+                    <div class="invalid-tooltip">
+                        Ingresa un nombre o apellido para buscar.
+                    </div>
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
             </div>
             <div>
@@ -41,12 +44,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="usuario:${usuarios}">
-                    <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}">
-                    </td>
+                    <td class=".idUsuarioTabla" th:text="${usuario.idUsuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.roles[0].rol}"></td>
                     <td th:text="${usuario.estatus}?'Activo':'Inactivo'"></td>
-                    <td th:text="${#dates.format(usuario.fechaCreacion, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${#dates.format(usuario.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></td>
                     <td>
                             <a title="Detalles" th:href="@{/usuarios/detalle/{id} (id=${usuario.idUsuario}) }">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">

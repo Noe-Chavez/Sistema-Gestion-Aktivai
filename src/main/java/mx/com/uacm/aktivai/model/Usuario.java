@@ -15,6 +15,8 @@ public class Usuario {
     private Integer idUsuario;
     @Column(name = "usuario")
     private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String password;
     private String email;
     private boolean estatus;
@@ -93,16 +95,32 @@ public class Usuario {
         this.fechaCreacion = fechaCreacion;
     }
 
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
-        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getAvatar(), usuario.getAvatar()) && Objects.equals(getFechaCreacion(), usuario.getFechaCreacion()) && Objects.equals(getRoles(), usuario.getRoles());
+        return isEstatus() == usuario.isEstatus() && Objects.equals(getIdUsuario(), usuario.getIdUsuario()) && Objects.equals(getNombre(), usuario.getNombre()) && Objects.equals(getApellidoPaterno(), usuario.getApellidoPaterno()) && Objects.equals(getApellidoMaterno(), usuario.getApellidoMaterno()) && Objects.equals(getPassword(), usuario.getPassword()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getAvatar(), usuario.getAvatar()) && Objects.equals(getFechaCreacion(), usuario.getFechaCreacion()) && Objects.equals(getRoles(), usuario.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdUsuario(), getNombre(), getPassword(), getEmail(), isEstatus(), getAvatar(), getFechaCreacion(), getRoles());
+        return Objects.hash(getIdUsuario(), getNombre(), getApellidoPaterno(), getApellidoMaterno(), getPassword(), getEmail(), isEstatus(), getAvatar(), getFechaCreacion(), getRoles());
     }
 
     @Override
@@ -110,6 +128,8 @@ public class Usuario {
         return "Usuario{" +
                 "idUsuario=" + idUsuario +
                 ", nombre='" + nombre + '\'' +
+                ", apellidoPaterno='" + apellidoPaterno + '\'' +
+                ", apellidoMaterno='" + apellidoMaterno + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", estatus=" + estatus +
